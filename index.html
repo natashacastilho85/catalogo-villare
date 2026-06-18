@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Villare Atelier — Eternização Floral</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--cream:#F7F3EE;--warm-white:#FDFAF7;--sand:#E8E0D5;--bark-light:#B8967E;--bark:#9E7B65;--bark-dark:#5C4337;--gold:#C4A882;--gold-light:#D4BC9E;--charcoal:#2C2420;--text-body:#3D3028;--text-muted:#6B5C52;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text-body);font-weight:300;line-height:1.6;}
+    @media(min-width:600px){body{max-width:680px;margin:0 auto;box-shadow:0 0 80px rgba(44,36,32,0.15);}}
+    .hero{min-height:100svh;background:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 32px;text-align:center;position:relative;overflow:hidden;}
+    .hero-divider{display:flex;align-items:center;gap:12px;margin:24px 0;width:200px;}
+    .hero-divider::before,.hero-divider::after{content:'';flex:1;height:1px;background:var(--gold);opacity:0.5;}
+    .hero-divider-diamond{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;}
+    .hero-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(16px,4.5vw,20px);color:var(--bark);letter-spacing:0.05em;}
+    .hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer;}
+    .hero-scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,transparent,var(--gold));}
+    .hero-scroll span{font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:var(--bark-light);}
+    .intro{padding:80px 32px;background:var(--bark-dark);position:relative;}
+    .intro::after{content:'"';position:absolute;top:40px;right:24px;font-family:'Cormorant Garamond',serif;font-size:120px;line-height:1;color:rgba(247,243,238,0.04);pointer-events:none;}
+    .section-label{font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:var(--bark);opacity:1;display:block;margin-bottom:20px;}
+    .intro .section-label,.process-section .section-label,.testimonials .section-label{color:var(--gold-light);}
+    .intro-text{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,5.5vw,26px);line-height:1.75;color:rgba(247,243,238,0.88);}
+    .intro-text em{color:var(--gold-light);font-style:italic;}
+    .intro-details{margin-top:40px;padding-top:32px;border-top:1px solid rgba(247,243,238,0.15);display:flex;flex-direction:column;gap:20px;}
+    .detail-item{display:flex;align-items:flex-start;gap:20px;}
+    .detail-number{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--gold-light);line-height:1;min-width:48px;}
+    .detail-text{font-size:13px;color:rgba(247,243,238,0.72);line-height:1.6;padding-top:4px;}
+    .detail-text strong{color:rgba(247,243,238,0.95);font-weight:500;display:block;margin-bottom:2px;}
+    .featured-pieces{padding:80px 32px;background:var(--cream);}
+    .featured-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,8vw,38px);color:var(--bark-dark);line-height:1.2;margin-bottom:8px;}
+    .featured-title em{font-style:italic;color:var(--bark);}
+    .featured-subtitle{font-size:12px;color:var(--text-muted);margin-bottom:48px;}
+    .piece-card{background:white;border-radius:2px;overflow:hidden;box-shadow:0 2px 24px rgba(44,36,32,0.08);margin-bottom:32px;opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease;position:relative;}
+    .piece-card.visible{opacity:1;transform:translateY(0);}
+    .piece-badge{position:absolute;top:16px;left:16px;background:var(--bark-dark);color:white;font-size:8px;letter-spacing:0.3em;text-transform:uppercase;padding:5px 10px;z-index:2;font-family:'Jost',sans-serif;}
+    .piece-img-wrap{position:relative;aspect-ratio:1;overflow:hidden;}
+    .piece-info{padding:24px 20px 20px;}
+    .piece-name{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,6vw,28px);font-weight:400;color:var(--charcoal);line-height:1.2;}
+    .piece-medida{font-size:11px;color:var(--text-muted);letter-spacing:0.04em;margin-top:3px;margin-bottom:4px;}
+    .piece-desc{font-size:13px;color:var(--text-muted);margin-top:6px;line-height:1.6;}
+    .piece-footer{display:flex;align-items:center;justify-content:space-between;margin-top:20px;padding-top:16px;border-top:1px solid var(--sand);gap:12px;}
+    .piece-price{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,6vw,28px);font-weight:300;color:var(--bark);line-height:1;}
+    .piece-cta{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--bark);border:1px solid var(--bark-light);padding:10px 16px;text-decoration:none;font-family:'Jost',sans-serif;font-weight:400;white-space:nowrap;flex-shrink:0;}
+    .process-section{padding:80px 32px;background:var(--bark-dark);position:relative;overflow:hidden;}
+    .process-section::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;border:1px solid rgba(196,168,130,0.1);}
+    .process-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(24px,7vw,32px);color:var(--cream);line-height:1.3;margin-bottom:40px;}
+    .process-title em{font-style:italic;color:var(--gold-light);}
+    .process-steps{display:flex;flex-direction:column;}
+    .process-step{display:flex;gap:20px;padding:20px 0;border-bottom:1px solid rgba(196,168,130,0.15);}
+    .process-step:last-child{border-bottom:none;}
+    .step-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--gold);line-height:1;min-width:32px;opacity:0.6;}
+    .step-title{font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:var(--cream);margin-bottom:4px;font-weight:400;}
+    .step-desc{font-size:13px;color:rgba(247,243,238,0.65);line-height:1.6;}
+    .other-pieces-section{padding:80px 32px;background:var(--cream);}
+    .other-header{margin-bottom:40px;}
+    .other-header h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(24px,7vw,32px);color:var(--bark-dark);line-height:1.3;margin:8px 0;}
+    .other-header p{font-size:12px;color:var(--text-muted);line-height:1.6;}
+    .pieces-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:stretch;}
+    .mini-card{background:white;border-radius:2px;overflow:hidden;box-shadow:0 1px 12px rgba(44,36,32,0.05);opacity:0;transform:translateY(16px);transition:opacity 0.5s ease,transform 0.5s ease;display:flex;flex-direction:column;}
+    .mini-card.visible{opacity:1;transform:translateY(0);}
+    .mini-img{position:relative;overflow:hidden;aspect-ratio:1;}
+    .mini-info{padding:14px 12px 16px;display:flex;flex-direction:column;flex:1;}
+    .mini-name{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--charcoal);font-weight:400;}
+    .mini-desc{font-size:10px;color:var(--text-muted);margin-top:3px;line-height:1.5;flex:1;}
+    .mini-price{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--bark);margin-top:10px;flex-shrink:0;}
+    .piece-img-wrap .carousel,.mini-img .carousel{position:absolute!important;inset:0;width:100%;height:100%;overflow:hidden;}
+    .carousel-track{display:flex!important;height:100%;transition:transform 0.4s ease;will-change:transform;}
+    .carousel-track img{flex-shrink:0!important;min-width:100%!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;display:block!important;}
+    .carousel{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;}
+    .carousel-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(92,67,55,0.6);color:white;border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:4;}
+    .carousel-btn.prev{left:6px;}.carousel-btn.next{right:6px;}
+    .carousel-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:3;}
+    .carousel-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,0.45);transition:background 0.2s;}
+    .carousel-dot.active{background:white;}
+    .testimonials{padding:80px 32px;background:var(--bark-dark);overflow:hidden;}
+    .testimonials h2{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(22px,6.5vw,30px);color:var(--cream);margin-bottom:36px;line-height:1.5;}
+    .testimonials h2 em{font-style:italic;color:var(--gold-light);}
+    .cta-section{padding:100px 32px;background:var(--cream);text-align:center;position:relative;overflow:hidden;}
+    .cta-ornament{width:60px;height:60px;border:1px solid var(--gold);transform:rotate(45deg);margin:0 auto 32px;display:flex;align-items:center;justify-content:center;}
+    .cta-ornament-inner{width:40px;height:40px;border:1px solid var(--gold);opacity:0.5;}
+    .cta-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(28px,8vw,38px);color:var(--bark-dark);line-height:1.3;margin:16px 0;}
+    .cta-title em{font-style:italic;color:var(--bark);}
+    .cta-subtitle{font-size:13px;color:var(--text-muted);line-height:1.7;max-width:280px;margin:0 auto 32px;}
+    .cta-btn{display:inline-block;background:var(--bark-dark);color:var(--cream);font-family:'Jost',sans-serif;font-size:10px;letter-spacing:0.3em;text-transform:uppercase;padding:16px 32px;text-decoration:none;font-weight:400;}
+    .footer{background:var(--bark-dark);padding:48px 32px;text-align:center;}
+    .footer-links{display:flex;justify-content:center;gap:24px;margin-bottom:20px;}
+    .footer-links a{font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:rgba(247,243,238,0.5);text-decoration:none;}
+    .footer-copy{font-size:10px;color:rgba(247,243,238,0.3);letter-spacing:0.1em;}
+    #lightbox{display:none;position:fixed;inset:0;background:rgba(15,10,8,0.93);z-index:1000;align-items:center;justify-content:center;flex-direction:column;}
+    #lightbox.open{display:flex;}
+    #lightbox-img{max-width:96vw;max-height:82vh;object-fit:contain;}
+    #lightbox-close{position:absolute;top:18px;right:20px;background:none;border:none;color:rgba(255,255,255,0.7);font-size:28px;cursor:pointer;padding:4px 8px;}
+    #lightbox-prev,#lightbox-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.12);border:none;color:white;font-size:22px;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+    #lightbox-prev{left:12px;}#lightbox-next{right:12px;}
+    #lightbox-counter{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:0.2em;color:rgba(255,255,255,0.45);font-family:'Jost',sans-serif;}
+    #lightbox-prev.hidden,#lightbox-next.hidden{display:none;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/logotipo.png" alt="Villare Atelier" style="width:220px;max-width:68vw;margin-bottom:28px;display:block;animation:fadeUp 1s ease 0.3s both;">
+  <div class="hero-divider" style="animation:fadeUp 1s ease 0.6s both;"><div class="hero-divider-diamond"></div></div>
+  <p class="hero-tagline" style="animation:fadeUp 1s ease 0.8s both;">Onde a memória é cultivada</p>
+  <div class="hero-scroll" onclick="document.querySelector('.intro').scrollIntoView({behavior:'smooth'})">
+    <div class="hero-scroll-line"></div>
+    <span>Explorar</span>
+  </div>
+</section>
+
+<section class="intro">
+  <span class="section-label">Sobre o processo</span>
+  <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(26px,7vw,34px);color:var(--cream);line-height:1.35;margin-bottom:24px;">Arte que <em style="font-style:italic;color:var(--gold-light);">atravessa gerações</em></h2>
+  <p class="intro-text">O buquê que esteve nas suas mãos no dia mais importante da sua vida merece <em>permanecer</em>.</p>
+  <p class="intro-text" style="margin-top:20px;font-size:clamp(16px,4.5vw,20px);color:rgba(247,243,238,0.65);">Não trabalhamos com flores secas comuns. Cada peça é criada com preservação botânica — mantendo beleza, textura e memória do seu buquê real.</p>
+  <div class="intro-details">
+    <div class="detail-item"><div class="detail-number">120</div><div class="detail-text"><strong>dias de processo</strong>Do recebimento à entrega da sua obra</div></div>
+    <div class="detail-item"><div class="detail-number">∞</div><div class="detail-text"><strong>durabilidade</strong>Uma arte que atravessa gerações</div></div>
+    <div class="detail-item"><div class="detail-number">↓</div><div class="detail-text"><strong>Recebemos de todo o Brasil</strong>Com orientação completa para envio seguro</div></div>
+  </div>
+</section>
+
+<section class="featured-pieces">
+  <span class="section-label">Coleção</span>
+  <h2 class="featured-title">As peças mais<br>escolhidas pelas <em>noivas</em></h2>
+  <p class="featured-subtitle">Cada peça é única, criada com as flores do seu buquê.</p>
+
+  <!-- Quadrado Gran -->
+  <div class="piece-card">
+    <div class="piece-badge">Mais escolhida</div>
+    <div class="piece-img-wrap">
+      <div class="carousel" data-index="0" style="position:absolute;inset:0;width:100%;height:100%;">
+        <div class="carousel-track">
+          <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Gran.jpg" alt="Quadrado Gran" loading="lazy">
+          <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Gran%20(1).jpg" alt="Quadrado Gran" loading="lazy">
+          <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Gran%20(2).jpg" alt="Quadrado Gran" loading="lazy">
+          <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Gran%20(3).jpg" alt="Quadrado Gran" loading="lazy">
+        </div>
+        <button class="carousel-btn prev" onclick="carousel(this,-1)" style="width:30px;height:30px;font-size:16px;">‹</button>
+        <button class="carousel-btn next" onclick="carousel(this,1)" style="width:30px;height:30px;font-size:16px;">›</button>
+        <div class="carousel-dots"><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
+      </div>
+    </div>
+    <div class="piece-info">
+      <div class="piece-name">Quadrado Gran</div>
+      <div class="piece-medida">26 × 26 × 5 cm</div>
+      <div class="piece-desc">Permite incluir foto, alianças e outros detalhes com muitas flores do seu buquê</div>
+      <div class="piece-footer">
+        <div class="piece-price">R$ 1.897</div>
+        <a target="_blank" rel="noopener" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Quadrado Gran e gostaria de verificar disponibilidade." class="piece-cta">Consultar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arco Magna -->
+  <div class="piece-card">
+    <div class="piece-img-wrap">
+      <div class="carousel" data-index="0" style="position:absolute;inset:0;width:100%;height:100%;">
+        <div class="carousel-track">
+          <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Magna.png" alt="Arco Magna" loading="lazy">
+        </div>
+        <div class="carousel-dots"><div class="carousel-dot active"></div></div>
+      </div>
+    </div>
+    <div class="piece-info">
+      <div class="piece-name">Arco Magna</div>
+      <div class="piece-medida">29 × 25 × 8 cm</div>
+      <div class="piece-desc">Perfeito para eternizar as flores em formato buquê e deixar sua arte ainda mais especial</div>
+      <div class="piece-footer">
+        <div class="piece-price">R$ 2.367</div>
+        <a target="_blank" rel="noopener" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Arco Magna e gostaria de verificar disponibilidade." class="piece-cta">Consultar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quadro Porta-Fotos -->
+  <div class="piece-card">
+    <div class="piece-img-wrap">
+      <div class="carousel" data-index="0" style="position:absolute;inset:0;width:100%;height:100%;">
+        <div class="carousel-track">
+          <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Quadro.jpg" alt="Quadro Porta-Fotos" loading="lazy">
+          <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Quadro%20(1).png" alt="Quadro Porta-Fotos" loading="lazy">
+          <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Quadro%20(2).jpg" alt="Quadro Porta-Fotos" loading="lazy">
+          <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Quadro%20(3).jpg" alt="Quadro Porta-Fotos" loading="lazy">
+          <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Quadro%20(4).jpg" alt="Quadro Porta-Fotos" loading="lazy">
+        </div>
+        <button class="carousel-btn prev" onclick="carousel(this,-1)" style="width:30px;height:30px;font-size:16px;">‹</button>
+        <button class="carousel-btn next" onclick="carousel(this,1)" style="width:30px;height:30px;font-size:16px;">›</button>
+        <div class="carousel-dots"><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
+      </div>
+    </div>
+    <div class="piece-info">
+      <div class="piece-name">Quadro Porta-Fotos</div>
+      <div class="piece-medida">57 × 41 × 5 cm · foto 45×30</div>
+      <div class="piece-desc">Muitas flores eternizadas na moldura de um belo porta-retratos</div>
+      <div class="piece-footer">
+        <div class="piece-price">R$ 2.747</div>
+        <a target="_blank" rel="noopener" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Quadro Porta-Fotos e gostaria de verificar disponibilidade." class="piece-cta">Consultar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process-section">
+  <span class="section-label">Como funciona</span>
+  <h2 class="process-title">Um processo feito<br>com <em>cuidado e tempo</em></h2>
+  <div class="process-steps">
+    <div class="process-step"><div class="step-num">1</div><div class="step-content"><div class="step-title">Envio do buquê</div><div class="step-desc">Enviamos todas as orientações para o envio seguro do seu buquê de qualquer cidade do Brasil.</div></div></div>
+    <div class="process-step"><div class="step-num">2</div><div class="step-content"><div class="step-title">Preservação botânica</div><div class="step-desc">Processo de preservação botânica que mantém a beleza e textura das flores. As cores se transformam — preservamos o colorido e a essência, não a cor exata.</div></div></div>
+    <div class="process-step"><div class="step-num">3</div><div class="step-content"><div class="step-title">Criação da peça</div><div class="step-desc">Cada peça é composta e moldada à mão com atenção a cada detalhe.</div></div></div>
+    <div class="process-step"><div class="step-num">4</div><div class="step-content"><div class="step-title">Entrega</div><div class="step-desc">Sua arte chega embalada com cuidado, pronta para durar gerações.</div></div></div>
+  </div>
+</section>
+
+<section class="other-pieces-section">
+  <div class="other-header">
+    <span style="font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:var(--bark-light);display:block;margin-bottom:6px;">Coleção flores 3D</span>
+    <span class="section-label">Outras possibilidades</span>
+    <h2>Mais formatos de eternização</h2>
+    <p>Cada buquê é único. Me chame no WhatsApp para descobrir o formato ideal para as suas flores.</p>
+  </div>
+  <div class="pieces-grid">
+
+    <!-- Retângulo Voluma -->
+    <div class="mini-card">
+      <div class="mini-img">
+        <div class="carousel" data-index="0" style="position:absolute;inset:0;width:100%;height:100%;">
+          <div class="carousel-track">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Voluma.jpg" alt="Retângulo Voluma" loading="lazy">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Voluma%20(2).jpg" alt="Retângulo Voluma" loading="lazy">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Voluma%20(3).jpg" alt="Retângulo Voluma" loading="lazy">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Voluma%20(4).jpg" alt="Retângulo Voluma" loading="lazy">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Voluma%20(5).jpg" alt="Retângulo Voluma" loading="lazy">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Voluma%20(6).jpg" alt="Retângulo Voluma" loading="lazy">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Voluma%20(7).jpg" alt="Retângulo Voluma" loading="lazy">
+          </div>
+          <button class="carousel-btn prev" onclick="carousel(this,-1)" style="width:22px;height:22px;font-size:11px;">‹</button>
+          <button class="carousel-btn next" onclick="carousel(this,1)" style="width:22px;height:22px;font-size:11px;">›</button>
+          <div class="carousel-dots"><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
+        </div>
+      </div>
+      <div class="mini-info">
+        <div class="mini-name">Retângulo Voluma</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">26×19×5 cm</div>
+        <div class="mini-desc">Formato clássico e atemporal para eternizar uma boa quantidade de flores</div>
+        <div class="mini-price">R$ 1.597</div>
+        <a href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Retângulo Voluma." target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--bark);border:1px solid var(--bark-light);padding:7px 12px;text-decoration:none;font-family:'Jost',sans-serif;font-weight:400;">Consultar</a>
+      </div>
+    </div>
+
+    <!-- Coração -->
+    <div class="mini-card">
+      <div class="mini-img">
+        <div class="carousel" data-index="0" style="position:absolute;inset:0;width:100%;height:100%;">
+          <div class="carousel-track">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Cora%C3%A7%C3%A3o%20.png" alt="Coração" loading="lazy">
+          </div>
+          <div class="carousel-dots"><div class="carousel-dot active"></div></div>
+        </div>
+      </div>
+      <div class="mini-info">
+        <div class="mini-name">Coração</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">29×24×6 cm</div>
+        <div class="mini-desc">Estiloso e romântico para eternizar as principais flores do seu buquê</div>
+        <div class="mini-price">R$ 1.697</div>
+        <a href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Coração." target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--bark);border:1px solid var(--bark-light);padding:7px 12px;text-decoration:none;font-family:'Jost',sans-serif;font-weight:400;">Consultar</a>
+      </div>
+    </div>
+
+    <!-- Retângulo Light -->
+    <div class="mini-card">
+      <div class="mini-img">
+        <div class="carousel" data-index="0" style="position:absolute;inset:0;width:100%;height:100%;">
+          <div class="carousel-track">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Light.jpg" alt="Retângulo Light" loading="lazy">
+          </div>
+          <div class="carousel-dots"><div class="carousel-dot active"></div></div>
+        </div>
+      </div>
+      <div class="mini-info">
+        <div class="mini-name">Retângulo Light</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">30×25×2 cm</div>
+        <div class="mini-desc">Perfeito para eternizar o convite do seu casamento com flores 2D</div>
+        <div class="mini-price">R$ 1.417</div>
+        <a href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Retângulo Light." target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--bark);border:1px solid var(--bark-light);padding:7px 12px;text-decoration:none;font-family:'Jost',sans-serif;font-weight:400;">Consultar</a>
+      </div>
+    </div>
+
+    <!-- Retângulo Essence -->
+    <div class="mini-card">
+      <div class="mini-img">
+        <div class="carousel" data-index="0" style="position:absolute;inset:0;width:100%;height:100%;">
+          <div class="carousel-track">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Essence.jpg" alt="Retângulo Essence" loading="lazy">
+          </div>
+          <div class="carousel-dots"><div class="carousel-dot active"></div></div>
+        </div>
+      </div>
+      <div class="mini-info">
+        <div class="mini-name">Retângulo Essence</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">30×25×5 cm</div>
+        <div class="mini-desc">Ideal para quem quer eternizar todas as melhores flores do seu buquê</div>
+        <div class="mini-price">R$ 1.877</div>
+        <a href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Retângulo Essence." target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--bark);border:1px solid var(--bark-light);padding:7px 12px;text-decoration:none;font-family:'Jost',sans-serif;font-weight:400;">Consultar</a>
+      </div>
+    </div>
+
+    <!-- Hexágono Large -->
+    <div class="mini-card">
+      <div class="mini-img">
+        <div class="carousel" data-index="0" style="position:absolute;inset:0;width:100%;height:100%;">
+          <div class="carousel-track">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Large.jpg" alt="Hexágono Large" loading="lazy">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Large%20(1).jpg" alt="Hexágono Large" loading="lazy">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Large%20(2).jpg" alt="Hexágono Large" loading="lazy">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Large%20(3).jpg" alt="Hexágono Large" loading="lazy">
+          </div>
+          <button class="carousel-btn prev" onclick="carousel(this,-1)" style="width:22px;height:22px;font-size:11px;">‹</button>
+          <button class="carousel-btn next" onclick="carousel(this,1)" style="width:22px;height:22px;font-size:11px;">›</button>
+          <div class="carousel-dots"><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
+        </div>
+      </div>
+      <div class="mini-info">
+        <div class="mini-name">Hexágono Large</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">20×18×5 cm</div>
+        <div class="mini-desc">Geométrico e estiloso, permite eternizar as principais flores do seu buquê</div>
+        <div class="mini-price">R$ 1.397</div>
+        <a href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Hexágono Large." target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--bark);border:1px solid var(--bark-light);padding:7px 12px;text-decoration:none;font-family:'Jost',sans-serif;font-weight:400;">Consultar</a>
+      </div>
+    </div>
+
+    <!-- Retângulo Fine -->
+    <div class="mini-card">
+      <div class="mini-img">
+        <div class="carousel" data-index="0" style="position:absolute;inset:0;width:100%;height:100%;">
+          <div class="carousel-track">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Fine.jpg" alt="Retângulo Fine" loading="lazy">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Fine%20(1).jpg" alt="Retângulo Fine" loading="lazy">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Fine%20(2).jpg" alt="Retângulo Fine" loading="lazy">
+          </div>
+          <button class="carousel-btn prev" onclick="carousel(this,-1)" style="width:22px;height:22px;font-size:11px;">‹</button>
+          <button class="carousel-btn next" onclick="carousel(this,1)" style="width:22px;height:22px;font-size:11px;">›</button>
+          <div class="carousel-dots"><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
+        </div>
+      </div>
+      <div class="mini-info">
+        <div class="mini-name">Retângulo Fine</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">30×16×5 cm</div>
+        <div class="mini-desc">Clássico e moderno para eternizar boa quantidade de flores do seu buquê</div>
+        <div class="mini-price">R$ 1.647</div>
+        <a href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Retângulo Fine." target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--bark);border:1px solid var(--bark-light);padding:7px 12px;text-decoration:none;font-family:'Jost',sans-serif;font-weight:400;">Consultar</a>
+      </div>
+    </div>
+
+    <!-- Quadrado Midi -->
+    <div class="mini-card">
+      <div class="mini-img">
+        <div class="carousel" data-index="0" style="position:absolute;inset:0;width:100%;height:100%;">
+          <div class="carousel-track">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Midi.png" alt="Quadrado Midi" loading="lazy">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Midi%20(1).jpg" alt="Quadrado Midi" loading="lazy">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Midi%20(2).jpg" alt="Quadrado Midi" loading="lazy">
+          </div>
+          <button class="carousel-btn prev" onclick="carousel(this,-1)" style="width:22px;height:22px;font-size:11px;">‹</button>
+          <button class="carousel-btn next" onclick="carousel(this,1)" style="width:22px;height:22px;font-size:11px;">›</button>
+          <div class="carousel-dots"><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
+        </div>
+      </div>
+      <div class="mini-info">
+        <div class="mini-name">Quadrado Midi</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">18×18×5 cm</div>
+        <div class="mini-desc">Discreto e clássico para eternizar as principais flores do seu buquê</div>
+        <div class="mini-price">R$ 1.447</div>
+        <a href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Quadrado Midi." target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--bark);border:1px solid var(--bark-light);padding:7px 12px;text-decoration:none;font-family:'Jost',sans-serif;font-weight:400;">Consultar</a>
+      </div>
+    </div>
+
+    <!-- Retângulo Lapela -->
+    <div class="mini-card">
+      <div class="mini-img">
+        <div class="carousel" data-index="0" style="position:absolute;inset:0;width:100%;height:100%;">
+          <div class="carousel-track">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Lapela%20.png" alt="Retângulo Lapela" loading="lazy">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Lapela1.jpg" alt="Retângulo Lapela" loading="lazy">
+          </div>
+          <button class="carousel-btn prev" onclick="carousel(this,-1)" style="width:22px;height:22px;font-size:11px;">‹</button>
+          <button class="carousel-btn next" onclick="carousel(this,1)" style="width:22px;height:22px;font-size:11px;">›</button>
+          <div class="carousel-dots"><div class="carousel-dot active"></div><div class="carousel-dot"></div></div>
+        </div>
+      </div>
+      <div class="mini-info">
+        <div class="mini-name">Retângulo Lapela</div>
+        <div style="font-size:10px;color:var(--text-muted);margin-top:2px;">16×10×5 cm</div>
+        <div class="mini-desc">Para eternizar uma flor especial ou uma composição de flores bem pequenas</div>
+        <div class="mini-price">R$ 1.247</div>
+        <a href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Retângulo Lapela." target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--bark);border:1px solid var(--bark-light);padding:7px 12px;text-decoration:none;font-family:'Jost',sans-serif;font-weight:400;">Consultar</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Coleção 2D -->
+<section style="padding:0 32px 60px;background:var(--cream);">
+  <div style="padding-top:32px;border-top:1px solid var(--sand);margin-bottom:20px;">
+    <span style="font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:var(--bark-light);">Coleção flores 2D</span>
+    <p style="font-size:10px;color:var(--text-muted);margin-top:4px;line-height:1.5;">Flores prensadas em resina. Desconto ao combinar com qualquer peça 3D.</p>
+  </div>
+
+  <!-- Bandeja -->
+  <div style="background:white;border-radius:2px;box-shadow:0 1px 12px rgba(44,36,32,0.05);display:flex;flex-direction:row;overflow:hidden;margin-bottom:16px;height:196px;">
+    <div style="width:160px;min-width:160px;flex-shrink:0;display:flex;flex-direction:column;">
+      <div style="position:relative;width:160px;height:160px;flex-shrink:0;">
+        <div class="carousel" data-index="0" style="position:absolute;inset:0;width:100%;height:100%;">
+          <div class="carousel-track">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Bandeja1.jpg" alt="Bandeja" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center;flex-shrink:0;">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Bandeja2.jpg" alt="Bandeja" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center;flex-shrink:0;">
+          </div>
+          <button class="carousel-btn prev" onclick="carousel(this,-1)" style="width:22px;height:22px;font-size:11px;">‹</button>
+          <button class="carousel-btn next" onclick="carousel(this,1)" style="width:22px;height:22px;font-size:11px;">›</button>
+          <div class="carousel-dots"><div class="carousel-dot active"></div><div class="carousel-dot"></div></div>
+        </div>
+      </div>
+      <a href="https://wa.me/5512991076545?text=Olá! Tenho interesse na Bandeja." target="_blank" rel="noopener" style="flex:1;display:flex;align-items:center;justify-content:center;font-size:8px;letter-spacing:0.25em;text-transform:uppercase;color:var(--bark);border-top:1px solid var(--sand);text-decoration:none;font-family:'Jost',sans-serif;">Consultar</a>
+    </div>
+    <div style="flex:1;padding:14px;display:flex;flex-direction:column;justify-content:center;min-width:0;gap:4px;overflow:hidden;">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--charcoal);line-height:1.2;">Bandeja</div>
+      <div style="font-size:11px;color:var(--text-muted);">27 × 25 × 1 cm</div>
+      <div style="font-size:13px;color:var(--text-muted);line-height:1.5;">Funcional e decorativa, eterniza as flores em uma peça única</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--bark);font-weight:300;margin-top:6px;">R$ 1.137</div>
+      <div style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);">✦ Com peça 3D · R$ 897</div>
+    </div>
+  </div>
+
+  <!-- Porta-Copos -->
+  <div style="background:white;border-radius:2px;box-shadow:0 1px 12px rgba(44,36,32,0.05);display:flex;flex-direction:row;overflow:hidden;margin-bottom:16px;height:196px;">
+    <div style="width:160px;min-width:160px;flex-shrink:0;display:flex;flex-direction:column;">
+      <div style="position:relative;width:160px;height:160px;flex-shrink:0;">
+        <div class="carousel" data-index="0" style="position:absolute;inset:0;width:100%;height:100%;">
+          <div class="carousel-track">
+            <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Portacopos.jpg" alt="Porta-Copos" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center;flex-shrink:0;">
+          </div>
+          <div class="carousel-dots"><div class="carousel-dot active"></div></div>
+        </div>
+      </div>
+      <a href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Porta-Copos." target="_blank" rel="noopener" style="flex:1;display:flex;align-items:center;justify-content:center;font-size:8px;letter-spacing:0.25em;text-transform:uppercase;color:var(--bark);border-top:1px solid var(--sand);text-decoration:none;font-family:'Jost',sans-serif;">Consultar</a>
+    </div>
+    <div style="flex:1;padding:14px;display:flex;flex-direction:column;justify-content:center;min-width:0;gap:3px;overflow:hidden;">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--charcoal);line-height:1.2;">Porta-Copos</div>
+      <div style="font-size:11px;color:var(--text-muted);">11 × 11 × 1 cm</div>
+      <div style="font-size:12px;color:var(--text-muted);line-height:1.4;">Kit de 4, 6 ou 8 unidades</div>
+      <table style="width:100%;border-collapse:collapse;margin-top:4px;">
+        <tr><td style="font-size:11px;color:var(--text-muted);padding:1px 6px 1px 0;width:32px;">4 un</td><td style="font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--bark);font-weight:300;">R$ 987</td><td style="font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--gold);font-weight:300;">R$ 787</td></tr>
+        <tr><td style="font-size:11px;color:var(--text-muted);padding:1px 6px 1px 0;">6 un</td><td style="font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--bark);font-weight:300;">R$ 1.077</td><td style="font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--gold);font-weight:300;">R$ 877</td></tr>
+        <tr><td style="font-size:11px;color:var(--text-muted);padding:1px 6px 1px 0;">8 un</td><td style="font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--bark);font-weight:300;">R$ 1.137</td><td style="font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--gold);font-weight:300;">R$ 937</td></tr>
+      </table>
+      <div style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-top:2px;">✦ Valores com peça 3D</div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <span class="section-label">O que as noivas sentiram</span>
+  <h2>Histórias que já <em>eternizamos</em></h2>
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    <div style="background:rgba(255,255,255,0.06);padding:22px 20px;border-left:2px solid var(--gold-light);position:relative;"><span style="position:absolute;top:12px;right:16px;font-size:26px;color:rgba(247,243,238,0.12);font-family:'Cormorant Garamond',serif;">❝</span><p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(16px,4.5vw,19px);line-height:1.75;color:rgba(247,243,238,0.90);">"Abrii a caixa e fiquei admirando. Ficaram lindas as peças!"</p><p style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(247,243,238,0.45);margin-top:12px;">Cliente Villare Atelier</p></div>
+    <div style="background:rgba(255,255,255,0.06);padding:22px 20px;border-left:2px solid var(--gold-light);position:relative;"><span style="position:absolute;top:12px;right:16px;font-size:26px;color:rgba(247,243,238,0.12);font-family:'Cormorant Garamond',serif;">❝</span><p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(16px,4.5vw,19px);line-height:1.75;color:rgba(247,243,238,0.90);">"Me levou de volta para o dia do casamento, e me fez reviver toda a emoção do grande dia."</p><p style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(247,243,238,0.45);margin-top:12px;">Cliente Villare Atelier</p></div>
+    <div style="background:rgba(255,255,255,0.06);padding:22px 20px;border-left:2px solid var(--gold-light);position:relative;"><span style="position:absolute;top:12px;right:16px;font-size:26px;color:rgba(247,243,238,0.12);font-family:'Cormorant Garamond',serif;">❝</span><p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(16px,4.5vw,19px);line-height:1.75;color:rgba(247,243,238,0.90);">"Agora temos eternizadas fisicamente lembranças do dia que o amor foi celebrado em nossas vidas."</p><p style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(247,243,238,0.45);margin-top:12px;">Cliente Villare Atelier</p></div>
+    <div style="background:rgba(255,255,255,0.06);padding:22px 20px;border-left:2px solid var(--gold-light);position:relative;"><span style="position:absolute;top:12px;right:16px;font-size:26px;color:rgba(247,243,238,0.12);font-family:'Cormorant Garamond',serif;">❝</span><p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(16px,4.5vw,19px);line-height:1.75;color:rgba(247,243,238,0.90);">"Natasha, o que é obra de arte... olhar para a peça e saber que vai poder passar de geração em geração."</p><p style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(247,243,238,0.45);margin-top:12px;">Cliente Villare Atelier</p></div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/topologo.png" alt="Villare Atelier" style="width:140px;max-width:60vw;margin:0 auto 32px;display:block;mix-blend-mode:multiply;opacity:0.6;">
+  <span class="section-label">Vamos começar</span>
+  <h2 class="cta-title">Seu buquê merece <em>permanecer</em></h2>
+  <p class="cta-subtitle">Entre em contato para verificar disponibilidade e iniciar a preservação do seu buquê.</p>
+  <a target="_blank" rel="noopener" href="https://wa.me/5512991076545?text=Olá! Gostaria de saber mais sobre a eternização do meu buquê." class="cta-btn">Falar no WhatsApp</a>
+</section>
+
+<footer class="footer">
+  <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/logotipo.png" alt="Villare Atelier" style="width:110px;margin:0 auto 20px;display:block;filter:brightness(0) invert(1) sepia(0.15) saturate(1.2) opacity(0.5);">
+  <div class="footer-links">
+    <a target="_blank" rel="noopener" href="https://instagram.com/villareatelier">Instagram</a>
+    <a target="_blank" rel="noopener" href="https://wa.me/5512991076545">WhatsApp</a>
+  </div>
+  <div class="footer-copy">© 2026 Villare Atelier · Guaratinguetá, SP</div>
+</footer>
+
+<div id="lightbox">
+  <button id="lightbox-close" onclick="closeLightbox()">×</button>
+  <button id="lightbox-prev" onclick="lightboxNav(-1)">‹</button>
+  <img id="lightbox-img" src="" alt="">
+  <button id="lightbox-next" onclick="lightboxNav(1)">›</button>
+  <div id="lightbox-counter"></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), entry.target.dataset.delay || 0);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.piece-card, .mini-card').forEach((el, i) => {
+    el.dataset.delay = (i % 2) * 100;
+    observer.observe(el);
+  });
+  window.carousel = function(btn, dir) {
+    const c = btn.closest('.carousel');
+    const track = c.querySelector('.carousel-track');
+    const dots = c.querySelectorAll('.carousel-dot');
+    const total = track.children.length;
+    let idx = parseInt(c.dataset.index || 0) + dir;
+    if (idx < 0) idx = total - 1;
+    if (idx >= total) idx = 0;
+    c.dataset.index = idx;
+    track.style.transform = `translateX(-${idx * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+  };
+  let _lbSrcs = [], _lbIdx = 0;
+  window.openLightbox = function(img) {
+    const car = img.closest ? img.closest('.carousel') : null;
+    const track = car ? car.querySelector('.carousel-track') : null;
+    if (track) { _lbSrcs = Array.from(track.querySelectorAll('img')).map(i => i.src); _lbIdx = parseInt(car.dataset.index || 0); }
+    else { _lbSrcs = [img.src]; _lbIdx = 0; }
+    _lbRender();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  window.closeLightbox = function() { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; };
+  window.lightboxNav = function(dir) { _lbIdx = (_lbIdx + dir + _lbSrcs.length) % _lbSrcs.length; _lbRender(); };
+  function _lbRender() {
+    document.getElementById('lightbox-img').src = _lbSrcs[_lbIdx];
+    document.getElementById('lightbox-counter').textContent = _lbSrcs.length > 1 ? (_lbIdx + 1) + ' / ' + _lbSrcs.length : '';
+    document.getElementById('lightbox-prev').classList.toggle('hidden', _lbSrcs.length <= 1);
+    document.getElementById('lightbox-next').classList.toggle('hidden', _lbSrcs.length <= 1);
+  }
+  document.getElementById('lightbox').addEventListener('click', function(e) { if (e.target === this) closeLightbox(); });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') lightboxNav(-1);
+    if (e.key === 'ArrowRight') lightboxNav(1);
+  });
+  document.querySelectorAll('.carousel').forEach(function(c) {
+    const zone = document.createElement('div');
+    zone.style.cssText = 'position:absolute;inset:0;z-index:2;cursor:zoom-in;';
+    zone.addEventListener('click', function(e) {
+      if (e.target.closest('.carousel-btn')) return;
+      const track = c.querySelector('.carousel-track');
+      const imgs = track ? Array.from(track.querySelectorAll('img')) : [];
+      if (!imgs.length) return;
+      openLightbox(imgs[parseInt(c.dataset.index || 0)] || imgs[0]);
+    });
+    c.appendChild(zone);
+  });
+});
+</script>
+</body>
+</html>
