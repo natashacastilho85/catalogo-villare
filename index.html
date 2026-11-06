@@ -210,6 +210,46 @@
     .hcard:not(.open) .hc-payment{left:12px;right:49px;bottom:10px;width:auto;min-height:38px;padding:6px 5px;font-size:9px;line-height:1.25;letter-spacing:.06em;box-sizing:border-box;}
     .hcard:not(.open) .hc-toggle{right:10px;bottom:14px;}
     .hcard.open .hc-info{height:auto;}
+
+    /* Cards compactos: rodapé unificado como nos cards abertos */
+    .hcard:not(.open){
+      position:relative;display:grid;grid-template-columns:50% 50%;
+      grid-template-rows:244px 76px;height:320px;cursor:pointer;
+    }
+    .hcard:not(.open) .hc-left{width:100%;min-width:0;height:244px;grid-column:1;grid-row:1;}
+    .hcard:not(.open) .hc-photo{width:100%;height:244px;}
+    .hcard:not(.open) .hc-cta-s{display:none;}
+    .hcard:not(.open) .hc-info{
+      position:static;grid-column:2;grid-row:1;height:244px;
+      min-width:0;box-sizing:border-box;padding:16px 13px 48px;
+      justify-content:flex-start;gap:5px;overflow:hidden;
+    }
+    .hcard:not(.open) .hc-name{font-size:clamp(19px,4.5vw,24px);padding-right:29px;}
+    .hcard:not(.open) .hc-desc{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;line-height:1.4;}
+    .hcard:not(.open) .hc-price{
+      position:absolute;left:calc(50% + 13px);bottom:87px;
+      margin:0;font-size:clamp(23px,5.4vw,29px);white-space:nowrap;
+    }
+    .hcard:not(.open) .hc-foot,.hcard:not(.open) .hc-actions{display:contents;}
+    .hcard:not(.open) .hc-actions .hc-payment,
+    .hcard:not(.open) .hc-actions .hc-cta-l{
+      display:flex;align-items:center;justify-content:center;
+      position:absolute;z-index:6;bottom:14px;top:auto;
+      width:calc((100% - 42px)/2);height:46px;min-height:46px;
+      box-sizing:border-box;margin:0;padding:7px 5px;
+      border:1px solid var(--bark-light);background:white;
+      color:var(--bark);font-family:'Jost',sans-serif;
+      font-size:9px;letter-spacing:.10em;line-height:1.3;
+      text-transform:uppercase;text-align:center;text-decoration:none;
+      white-space:normal;
+    }
+    .hcard:not(.open) .hc-actions .hc-payment{left:14px;right:auto;}
+    .hcard:not(.open) .hc-actions .hc-cta-l{right:14px;left:auto;}
+    .hcard:not(.open) .hc-toggle{top:13px;right:11px;bottom:auto;}
+    @media(max-width:370px){
+      .hcard:not(.open) .hc-actions .hc-payment,
+      .hcard:not(.open) .hc-actions .hc-cta-l{font-size:8px;letter-spacing:.07em;}
+    }
   </style>
 </head>
 <body>
