@@ -14,6 +14,8 @@
     body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text-body);font-weight:300;line-height:1.6;}
     @media(min-width:600px){body{max-width:680px;margin:0 auto;box-shadow:0 0 80px rgba(44,36,32,0.15);}}
     .hero{background:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px 32px 32px;text-align:center;position:relative;overflow:hidden;}
+    .hero-photo{width:100%;margin:26px auto 0;aspect-ratio:4/3;overflow:hidden;box-shadow:0 12px 36px rgba(44,36,32,.12);}
+    .hero-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;}
     .hero-divider{display:flex;align-items:center;gap:12px;margin:14px 0 12px;width:200px;}
     .hero-divider::before,.hero-divider::after{content:'';flex:1;height:1px;background:var(--gold);opacity:0.5;}
     .hero-divider-diamond{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;}
@@ -153,6 +155,7 @@
   <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/logotipo.png" alt="Villare Atelier" style="width:220px;max-width:68vw;margin-bottom:8px;display:block;animation:fadeUp 1s ease 0.3s both;">
   <div class="hero-divider" style="animation:fadeUp 1s ease 0.6s both;"><div class="hero-divider-diamond"></div></div>
   <p class="hero-tagline" style="animation:fadeUp 1s ease 0.8s both;">Onde a memória é cultivada</p>
+  <div class="hero-photo"><img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/abertura.jpg" alt="Eternização floral Villare Atelier" fetchpriority="high"></div>
 </section>
 
 <section class="intro">
@@ -181,8 +184,12 @@
       <div class="carousel" data-index="0" style="position:absolute;inset:0;width:100%;height:100%;">
         <div class="carousel-track">
           <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/Magna.png" alt="Arco Magna" loading="lazy">
+          <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/abertura.jpg" alt="Arco Magna" loading="lazy">
+          <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/magna1.jpg" alt="Arco Magna" loading="lazy">
         </div>
-        <div class="carousel-dots"><div class="carousel-dot active"></div></div>
+        <button class="carousel-btn prev" onclick="carousel(this,-1)" style="width:30px;height:30px;font-size:16px;">‹</button>
+        <button class="carousel-btn next" onclick="carousel(this,1)" style="width:30px;height:30px;font-size:16px;">›</button>
+        <div class="carousel-dots"><div class="carousel-dot active"></div><div class="carousel-dot"></div><div class="carousel-dot"></div></div>
       </div>
     </div>
     <div class="piece-info">
@@ -253,7 +260,7 @@
 <section class="launch-section">
   <div style="border-left:3px solid var(--gold);padding-left:16px;margin-bottom:40px;">
     <span class="section-label" style="margin-bottom:6px;">Lançamentos</span>
-    <h2 class="featured-title">Novidade<br>no <em>ateliê</em></h2>
+    <h2 class="featured-title">Novidade<br>no <em>atelier</em></h2>
     <p class="featured-subtitle" style="margin-bottom:0;">Uma peça nova para eternizar as suas flores.</p>
   </div>
 
