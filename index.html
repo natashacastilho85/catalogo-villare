@@ -148,6 +148,23 @@
     .hcard.open .hc-foot{display:flex;align-items:center;justify-content:space-between;margin-top:20px;padding-top:16px;border-top:1px solid var(--sand);gap:12px;cursor:default;}
     .hcard.open .hc-price{margin-top:0;}
     .hcard.open .hc-cta-l{display:inline-block;margin-left:auto;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--bark);border:1px solid var(--bark-light);padding:10px 16px;text-decoration:none;font-family:'Jost',sans-serif;font-weight:400;white-space:nowrap;flex-shrink:0;}
+
+    /* Consulta das condições de pagamento */
+    .payment-trigger{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--bark-light);background:transparent;color:var(--bark);font-family:'Jost',sans-serif;font-size:10px;letter-spacing:.08em;padding:9px 11px;cursor:pointer;line-height:1.3;transition:background .2s ease;}
+    .payment-trigger:hover,.payment-trigger:focus-visible{background:var(--sand);}
+    .piece-payment{margin-top:12px;}
+    .hcard .hc-payment{display:none;}
+    .hcard.open .hc-payment{display:inline-flex;align-self:flex-start;margin-top:12px;}
+    .payment-modal[hidden]{display:none!important;}
+    .payment-modal{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(35,26,22,.65);}
+    .payment-panel{position:relative;background:#faf7f1;color:var(--charcoal);width:min(100%,440px);max-height:calc(100dvh - 40px);overflow-y:auto;padding:35px 27px 28px;box-shadow:0 15px 55px rgba(0,0,0,.23);}
+    .payment-close{position:absolute;right:12px;top:10px;border:0;background:transparent;color:var(--bark);font-size:28px;line-height:1;cursor:pointer;width:38px;height:38px;}
+    .payment-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;color:var(--bark);margin:0 28px 10px 0;line-height:1.1;}
+    .payment-intro{font-size:13px;line-height:1.65;color:var(--text-muted);margin:0 0 21px;}
+    .payment-option{padding:15px 0;border-top:1px solid var(--sand);}
+    .payment-option strong{display:block;font-size:11px;letter-spacing:.13em;color:var(--bark);font-weight:500;margin-bottom:6px;}
+    .payment-option p{font-size:13px;line-height:1.65;color:var(--text-muted);margin:0;}
+    body.payment-locked{overflow:hidden;}
   </style>
 </head>
 <body>
@@ -198,7 +215,7 @@
       <div class="piece-medida">29 × 25 × 8 cm</div>
       <div class="piece-desc">Perfeito para eternizar as flores em formato buquê e deixar sua arte ainda mais especial</div>
       <div class="piece-footer">
-        <div class="piece-price">R$ 2.417</div>
+        <div class="piece-price">R$ 2.417</div><button type="button" class="payment-trigger piece-payment" data-payment-open aria-haspopup="dialog">Formas de pagamento</button>
         <a target="_blank" rel="noopener" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Arco Magna e gostaria de verificar disponibilidade." class="piece-cta">Consultar</a>
       </div>
     </div>
@@ -224,7 +241,7 @@
       <div class="piece-medida">26 × 26 × 5 cm</div>
       <div class="piece-desc">Permite incluir foto, alianças e outros detalhes com muitas flores do seu buquê</div>
       <div class="piece-footer">
-        <div class="piece-price">R$ 1.917</div>
+        <div class="piece-price">R$ 1.917</div><button type="button" class="payment-trigger piece-payment" data-payment-open aria-haspopup="dialog">Formas de pagamento</button>
         <a target="_blank" rel="noopener" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Quadrado Gran e gostaria de verificar disponibilidade." class="piece-cta">Consultar</a>
       </div>
     </div>
@@ -251,7 +268,7 @@
       <div class="piece-medida">57 × 41 × 5 cm · foto 45×30</div>
       <div class="piece-desc">Muitas flores eternizadas na moldura de um belo porta-retratos</div>
       <div class="piece-footer">
-        <div class="piece-price">R$ 3.077</div>
+        <div class="piece-price">R$ 3.077</div><button type="button" class="payment-trigger piece-payment" data-payment-open aria-haspopup="dialog">Formas de pagamento</button>
         <a target="_blank" rel="noopener" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Quadro Infinite e gostaria de verificar disponibilidade." class="piece-cta">Consultar</a>
       </div>
     </div>
@@ -284,7 +301,7 @@
       <div class="piece-desc">Suas flores ganham um lugar para sempre ficar, seja no canto, no centro da sala ou onde você quiser</div>
       <div class="piece-desc">Disponível em branca, preta e dourada</div>
       <div class="piece-footer">
-        <div class="piece-price">R$ 2.847</div>
+        <div class="piece-price">R$ 2.847</div><button type="button" class="payment-trigger piece-payment" data-payment-open aria-haspopup="dialog">Formas de pagamento</button>
         <a target="_blank" rel="noopener" href="https://wa.me/5512991076545?text=Olá! Tenho interesse na Mesinha e gostaria de verificar disponibilidade." class="piece-cta">Consultar</a>
       </div>
     </div>
@@ -314,7 +331,7 @@
         <div class="hc-med">26×19×5 cm</div>
         <div class="hc-desc">Formato clássico e atemporal para eternizar uma boa quantidade de flores</div>
         
-        <div class="hc-foot"><div class="hc-price">R$ 1.857</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Retângulo Voluma." target="_blank" rel="noopener">Consultar</a></div>
+        <div class="hc-foot"><div class="hc-price">R$ 1.857</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Retângulo Voluma." target="_blank" rel="noopener">Consultar</a></div><button type="button" class="payment-trigger hc-payment" data-payment-open aria-haspopup="dialog">Formas de pagamento</button>
       </div>
     </div>
     <div class="hcard">
@@ -330,7 +347,7 @@
         <div class="hc-med">29×24×6 cm</div>
         <div class="hc-desc">Estiloso e romântico para eternizar as principais flores do seu buquê</div>
         
-        <div class="hc-foot"><div class="hc-price">R$ 1.447</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Coração." target="_blank" rel="noopener">Consultar</a></div>
+        <div class="hc-foot"><div class="hc-price">R$ 1.447</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Coração." target="_blank" rel="noopener">Consultar</a></div><button type="button" class="payment-trigger hc-payment" data-payment-open aria-haspopup="dialog">Formas de pagamento</button>
       </div>
     </div>
     <div class="hcard">
@@ -346,7 +363,7 @@
         <div class="hc-med">28×24×5 cm</div>
         <div class="hc-desc">Uma escultura de amor para flores pequenas</div>
         
-        <div class="hc-foot"><div class="hc-price">R$ 1.327</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Arco Love." target="_blank" rel="noopener">Consultar</a></div>
+        <div class="hc-foot"><div class="hc-price">R$ 1.327</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Arco Love." target="_blank" rel="noopener">Consultar</a></div><button type="button" class="payment-trigger hc-payment" data-payment-open aria-haspopup="dialog">Formas de pagamento</button>
       </div>
     </div>
     <div class="hcard">
@@ -362,7 +379,7 @@
         <div class="hc-med">30×25×2 cm</div>
         <div class="hc-desc">Perfeito para eternizar o convite do seu casamento com flores 2D</div>
         
-        <div class="hc-foot"><div class="hc-price">R$ 1.487</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Retângulo Light." target="_blank" rel="noopener">Consultar</a></div>
+        <div class="hc-foot"><div class="hc-price">R$ 1.487</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Retângulo Light." target="_blank" rel="noopener">Consultar</a></div><button type="button" class="payment-trigger hc-payment" data-payment-open aria-haspopup="dialog">Formas de pagamento</button>
       </div>
     </div>
     <div class="hcard">
@@ -378,7 +395,7 @@
         <div class="hc-med">30×25×10 cm</div>
         <div class="hc-desc">Ideal para quem quer eternizar todas as melhores flores do seu buquê</div>
         
-        <div class="hc-foot"><div class="hc-price">R$ 2.897</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Retângulo Essence." target="_blank" rel="noopener">Consultar</a></div>
+        <div class="hc-foot"><div class="hc-price">R$ 2.897</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Retângulo Essence." target="_blank" rel="noopener">Consultar</a></div><button type="button" class="payment-trigger hc-payment" data-payment-open aria-haspopup="dialog">Formas de pagamento</button>
       </div>
     </div>
     <div class="hcard">
@@ -394,7 +411,7 @@
         <div class="hc-med">20×18×5 cm</div>
         <div class="hc-desc">Geométrico e estiloso, permite eternizar as principais flores do seu buquê</div>
         
-        <div class="hc-foot"><div class="hc-price">R$ 1.367</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Hexágono Large." target="_blank" rel="noopener">Consultar</a></div>
+        <div class="hc-foot"><div class="hc-price">R$ 1.367</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Hexágono Large." target="_blank" rel="noopener">Consultar</a></div><button type="button" class="payment-trigger hc-payment" data-payment-open aria-haspopup="dialog">Formas de pagamento</button>
       </div>
     </div>
     <div class="hcard">
@@ -410,7 +427,7 @@
         <div class="hc-med">30×16×5 cm</div>
         <div class="hc-desc">Clássico e moderno para eternizar boa quantidade de flores do seu buquê</div>
         
-        <div class="hc-foot"><div class="hc-price">R$ 2.047</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Retângulo Fine." target="_blank" rel="noopener">Consultar</a></div>
+        <div class="hc-foot"><div class="hc-price">R$ 2.047</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Retângulo Fine." target="_blank" rel="noopener">Consultar</a></div><button type="button" class="payment-trigger hc-payment" data-payment-open aria-haspopup="dialog">Formas de pagamento</button>
       </div>
     </div>
     <div class="hcard">
@@ -426,7 +443,7 @@
         <div class="hc-med">18×18×5 cm</div>
         <div class="hc-desc">Discreto e clássico para eternizar as principais flores do seu buquê</div>
         
-        <div class="hc-foot"><div class="hc-price">R$ 1.487</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Quadrado Midi." target="_blank" rel="noopener">Consultar</a></div>
+        <div class="hc-foot"><div class="hc-price">R$ 1.487</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Quadrado Midi." target="_blank" rel="noopener">Consultar</a></div><button type="button" class="payment-trigger hc-payment" data-payment-open aria-haspopup="dialog">Formas de pagamento</button>
       </div>
     </div>
     <div class="hcard">
@@ -442,7 +459,7 @@
         <div class="hc-med">16×10×8 cm</div>
         <div class="hc-desc">Para eternizar uma flor especial ou uma composição de flores bem pequenas</div>
         
-        <div class="hc-foot"><div class="hc-price">R$ 1.207</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Retângulo Lapela." target="_blank" rel="noopener">Consultar</a></div>
+        <div class="hc-foot"><div class="hc-price">R$ 1.207</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Retângulo Lapela." target="_blank" rel="noopener">Consultar</a></div><button type="button" class="payment-trigger hc-payment" data-payment-open aria-haspopup="dialog">Formas de pagamento</button>
       </div>
     </div>
   </div>
@@ -470,7 +487,7 @@
         <div class="hc-med">27 × 25 × 1 cm</div>
         <div class="hc-desc">Funcional e decorativa, eterniza as flores em uma peça única</div>
         
-        <div class="hc-foot"><div class="hc-price">R$ 1.137</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse na Bandeja." target="_blank" rel="noopener">Consultar</a></div>
+        <div class="hc-foot"><div class="hc-price">R$ 1.137</div><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse na Bandeja." target="_blank" rel="noopener">Consultar</a></div><button type="button" class="payment-trigger hc-payment" data-payment-open aria-haspopup="dialog">Formas de pagamento</button>
       </div>
     </div>
     <div class="hcard">
@@ -486,7 +503,7 @@
         <div class="hc-med">11 × 11 × 1 cm</div>
         <div class="hc-desc">Kit de 4, 6 ou 8 unidades</div>
         <div class="hc-pl">4 un · <span>R$ 987</span></div><div class="hc-pl">6 un · <span>R$ 1.077</span></div><div class="hc-pl">8 un · <span>R$ 1.187</span></div>
-        <div class="hc-foot"><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Porta-Copos." target="_blank" rel="noopener">Consultar</a></div>
+        <div class="hc-foot"><a class="hc-cta-l" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Porta-Copos." target="_blank" rel="noopener">Consultar</a></div><button type="button" class="payment-trigger hc-payment" data-payment-open aria-haspopup="dialog">Formas de pagamento</button>
       </div>
     </div>
   </div>
@@ -637,6 +654,52 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   var first = document.querySelector('.hcard');
   if (first) setOpen(first, true);
+});
+</script>
+
+<div class="payment-modal" id="payment-modal" hidden>
+  <div class="payment-panel" role="dialog" aria-modal="true" aria-labelledby="payment-modal-title" tabindex="-1">
+    <button type="button" class="payment-close" aria-label="Fechar formas de pagamento">&times;</button>
+    <h2 class="payment-title" id="payment-modal-title">Formas de pagamento</h2>
+    <p class="payment-intro">O pagamento é realizado no fechamento do contrato. Escolha a forma que preferir:</p>
+    <div class="payment-option"><strong>PIX</strong><p>Valor total com 7% de desconto.</p></div>
+    <div class="payment-option"><strong>CARTÃO</strong><p>Valor total em até 3x sem juros ou de 4 a 12x com juros.</p></div>
+    <div class="payment-option"><strong>PIX + CARTÃO</strong><p>Você escolhe quanto deseja pagar no PIX e o restante no cartão em até 3x sem juros ou de 4 a 12x com juros.</p></div>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const modal = document.getElementById('payment-modal');
+  const panel = modal.querySelector('.payment-panel');
+  const close = modal.querySelector('.payment-close');
+  let previousFocus = null;
+  document.querySelectorAll('[data-payment-open]').forEach(function (button) {
+    button.addEventListener('click', function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      previousFocus = button;
+      modal.hidden = false;
+      document.body.classList.add('payment-locked');
+      close.focus();
+    });
+  });
+  function dismiss() {
+    modal.hidden = true;
+    document.body.classList.remove('payment-locked');
+    if (previousFocus) previousFocus.focus();
+  }
+  close.addEventListener('click', dismiss);
+  modal.addEventListener('click', function (event) { if (event.target === modal) dismiss(); });
+  document.addEventListener('keydown', function (event) {
+    if (modal.hidden) return;
+    if (event.key === 'Escape') dismiss();
+    if (event.key === 'Tab') {
+      const focusables = [close];
+      if (event.shiftKey || document.activeElement !== close) {
+        event.preventDefault(); close.focus();
+      }
+    }
+  });
 });
 </script>
 </body>
