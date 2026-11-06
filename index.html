@@ -214,13 +214,13 @@
     /* Cards compactos: rodapé unificado como nos cards abertos */
     .hcard:not(.open){
       position:relative;display:grid;grid-template-columns:50% 50%;
-      grid-template-rows:244px 76px;height:320px;cursor:pointer;
+      grid-template-rows:auto 76px;height:auto;cursor:pointer;
     }
-    .hcard:not(.open) .hc-left{width:100%;min-width:0;height:244px;grid-column:1;grid-row:1;}
-    .hcard:not(.open) .hc-photo{width:100%;height:244px;}
+    .hcard:not(.open) .hc-left{width:100%;min-width:0;height:auto;grid-column:1;grid-row:1;}
+    .hcard:not(.open) .hc-photo{width:100%;height:auto;aspect-ratio:1 / 1;}
     .hcard:not(.open) .hc-cta-s{display:none;}
     .hcard:not(.open) .hc-info{
-      position:static;grid-column:2;grid-row:1;height:244px;
+      position:static;grid-column:2;grid-row:1;height:auto;
       min-width:0;box-sizing:border-box;padding:16px 13px 48px;
       justify-content:flex-start;gap:5px;overflow:hidden;
     }
