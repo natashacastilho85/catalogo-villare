@@ -112,6 +112,9 @@
     .hcard .hc-info{flex:1;padding:14px;display:flex;flex-direction:column;justify-content:center;min-width:0;gap:4px;overflow:hidden;position:relative;}
     .hcard .hc-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--charcoal);line-height:1.25;padding-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
     .hcard .hc-info > *{flex-shrink:0;}
+    .hcard .hc-open-only{display:none;}
+    .hcard.open .hc-open-only{display:block;font-size:13px;color:var(--text-muted);margin-top:8px;line-height:1.5;}
+    .hcard.hc-long:not(.open) .hc-desc{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
     .hcard .hc-med{font-size:11px;color:var(--text-muted);line-height:1.3;}
     .hcard .hc-desc{font-size:13px;color:var(--text-muted);line-height:1.5;}
     .hcard .hc-pl{font-size:12px;color:var(--text-muted);line-height:1.25;}
@@ -240,6 +243,32 @@
       <div class="piece-footer">
         <div class="piece-price">R$ 3.077</div>
         <a target="_blank" rel="noopener" href="https://wa.me/5512991076545?text=Olá! Tenho interesse no Quadro Infinite e gostaria de verificar disponibilidade." class="piece-cta">Consultar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mesinha -->
+  <div class="piece-card">
+    <div class="piece-badge">Lançamento</div>
+    <div class="piece-img-wrap">
+      <div class="carousel" data-index="0" style="position:absolute;inset:0;width:100%;height:100%;">
+        <div class="carousel-track">
+          <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/mesinha1.png" alt="Mesinha" loading="lazy">
+          <img src="https://raw.githubusercontent.com/natashacastilho85/catalogo-villare/main/imgs/mesinha2.png" alt="Mesinha" loading="lazy">
+        </div>
+        <button class="carousel-btn prev" onclick="carousel(this,-1)" style="width:30px;height:30px;font-size:16px;">‹</button>
+        <button class="carousel-btn next" onclick="carousel(this,1)" style="width:30px;height:30px;font-size:16px;">›</button>
+        <div class="carousel-dots"><div class="carousel-dot active"></div><div class="carousel-dot"></div></div>
+      </div>
+    </div>
+    <div class="piece-info">
+      <div class="piece-name">Mesinha</div>
+      <div class="piece-medida">Base: 40 cm de diâmetro × 4 cm de altura<br>Altura do chão: 40 cm</div>
+      <div class="piece-desc">Suas flores ganham um lugar para sempre ficar, seja no canto, no centro da sala ou onde você quiser</div>
+      <div class="piece-desc">Disponível em branca, preta e dourada</div>
+      <div class="piece-footer">
+        <div class="piece-price">R$ 2.847</div>
+        <a target="_blank" rel="noopener" href="https://wa.me/5512991076545?text=Olá! Tenho interesse na Mesinha e gostaria de verificar disponibilidade." class="piece-cta">Consultar</a>
       </div>
     </div>
   </div>
